@@ -137,6 +137,14 @@ body:
         ---
         ## For the Coding Agent
         
+        **Acceptance Criteria:**
+        - [ ] Implement the requested feature according to the detailed requirements
+        - [ ] Ensure the feature works as described in the user workflow
+        - [ ] Meet all specified success criteria
+        - [ ] Integrate smoothly with existing functionality
+        - [ ] Test the feature thoroughly with realistic scenarios
+        - [ ] Maintain system performance and security standards
+        
         **Implementation Approach:**
         - [ ] Analyze the feature requirements and determine implementation scope
         - [ ] Identify which files need to be modified (backend API, frontend UI, database schema)

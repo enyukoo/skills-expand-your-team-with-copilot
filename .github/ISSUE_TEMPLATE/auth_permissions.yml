@@ -134,6 +134,13 @@ body:
         ---
         ## For the Coding Agent
         
+        **Acceptance Criteria:**
+        - [ ] Implement the requested authentication/permission change safely and securely
+        - [ ] Verify the change works as expected through testing
+        - [ ] Ensure existing functionality remains intact
+        - [ ] Document any security implications or requirements
+        - [ ] Test both positive and negative access scenarios
+        
         **Security Checklist:**
         - [ ] Verify the requested change is appropriate and safe
         - [ ] Use secure password hashing (Argon2) for any new passwords
