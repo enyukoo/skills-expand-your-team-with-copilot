@@ -1,0 +1,151 @@
+name: "Bug Report"
+description: "Report something that's broken or not working correctly"
+title: "[BUG] "
+labels: ["bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+        
+        Use this template to report something that's broken or not working as expected in the Activities system.
+        
+        **Please provide detailed information** so the coding agent can understand and fix the problem quickly.
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: "What is broken?"
+      description: "Clearly describe what's not working"
+      placeholder: "e.g., Students can't register for Chess Club, Login button doesn't work, Activity times show incorrectly"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: "How to reproduce the problem"
+      description: "List the exact steps someone should follow to see this bug"
+      placeholder: |
+        1. Go to the activities page
+        2. Click on 'Chess Club'
+        3. Enter student email: student@mergington.edu
+        4. Click Register
+        5. See error message
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "What should happen instead?"
+      description: "Describe what you expected to happen"
+      placeholder: "e.g., Student should be successfully registered and see confirmation message"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: "What actually happens?"
+      description: "Describe what actually happens, including any error messages"
+      placeholder: "e.g., Page shows 'Error 500' message, Nothing happens when clicking the button"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: "How often does this happen?"
+      description: "This helps understand the scope of the problem"
+      options:
+        - "Always - Every time I try"
+        - "Usually - Most of the time"
+        - "Sometimes - Only occasionally"
+        - "Rarely - Just happened once"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: affected_areas
+    attributes:
+      label: "What parts of the system are affected?"
+      description: "Select all that apply"
+      options:
+        - label: "Student registration for activities"
+        - label: "Teacher login"
+        - label: "Activity display/viewing"
+        - label: "Search and filtering"
+        - label: "Participant management"
+        - label: "Mobile version"
+        - label: "Desktop version"
+
+  - type: input
+    id: specific_activity
+    attributes:
+      label: "Specific Activity (if applicable)"
+      description: "If this bug only affects certain activities, which ones?"
+      placeholder: "e.g., Chess Club, Drama Club"
+
+  - type: input
+    id: browser_device
+    attributes:
+      label: "Browser and Device"
+      description: "What browser and device are you using?"
+      placeholder: "e.g., Chrome on Windows laptop, Safari on iPhone"
+
+  - type: textarea
+    id: error_messages
+    attributes:
+      label: "Error Messages"
+      description: "Copy any error messages you see (exact text)"
+      placeholder: "e.g., 'HTTP 401: Authentication required for this action'"
+
+  - type: dropdown
+    id: user_type
+    attributes:
+      label: "What type of user experienced this bug?"
+      description: "This helps understand the context"
+      options:
+        - "Student trying to view activities"
+        - "Teacher trying to log in"
+        - "Teacher trying to register students"
+        - "Anyone using the site"
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: "Any workaround?"
+      description: "If you found a way to work around this problem, describe it"
+      placeholder: "e.g., Refreshing the page makes it work, Using a different browser works"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## For the Coding Agent
+        
+        **Acceptance Criteria:**
+        - [ ] Reproduce the bug using the provided steps
+        - [ ] Identify the root cause in the code (check backend API endpoints, frontend JavaScript, database interactions)
+        - [ ] Fix the underlying issue without breaking existing functionality
+        - [ ] Test the fix by following the reproduction steps and verifying the expected behavior occurs
+        - [ ] Verify the fix doesn't introduce new bugs in related functionality
+        
+        **Investigation Areas:**
+        - **Backend Issues**: Check `src/backend/routers/` for API endpoint problems
+        - **Frontend Issues**: Check `src/static/app.js` for JavaScript errors
+        - **Database Issues**: Check `src/backend/database.py` for data problems
+        - **Authentication Issues**: Check `src/backend/routers/auth.py` for login problems
+        - **UI Issues**: Check `src/static/index.html` and `src/static/styles.css` for display problems
+        
+        **Testing Steps:**
+        1. Start the application and reproduce the bug
+        2. Check browser console for JavaScript errors
+        3. Check server logs for backend errors
+        4. Apply the fix
+        5. Test the fix works as expected
+        6. Test that related functionality still works

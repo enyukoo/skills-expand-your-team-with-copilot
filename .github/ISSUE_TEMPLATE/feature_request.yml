@@ -1,0 +1,162 @@
+name: "New Feature Request"
+description: "Request a new feature or capability for the Activities system"
+title: "[FEATURE] Add "
+labels: ["enhancement", "new-feature"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## New Feature Request
+        
+        Use this template to request a completely new feature or capability for the Activities system.
+        
+        **Please provide detailed requirements** so the coding agent can implement the feature correctly.
+
+  - type: textarea
+    id: feature_description
+    attributes:
+      label: "What new feature do you want?"
+      description: "Describe the new feature or capability you need"
+      placeholder: "e.g., Email notifications when students register, Export participant lists to Excel, Calendar view of all activities"
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_problem
+    attributes:
+      label: "What problem does this solve?"
+      description: "Explain why this feature is needed and what problem it addresses"
+      placeholder: "e.g., Teachers don't know when students sign up, Hard to track attendance manually, Difficult to see scheduling conflicts"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: feature_users
+    attributes:
+      label: "Who would use this feature?"
+      description: "Select all that apply"
+      options:
+        - label: "Students"
+        - label: "Teachers"
+        - label: "School administrators"
+        - label: "Parents (future consideration)"
+
+  - type: dropdown
+    id: feature_category
+    attributes:
+      label: "What type of feature is this?"
+      description: "This helps understand the implementation scope"
+      options:
+        - "Data export/reporting"
+        - "Email/notification system"
+        - "Calendar/scheduling functionality"
+        - "User management enhancement"
+        - "Search/filtering improvement"
+        - "Mobile app feature"
+        - "Integration with other systems"
+        - "Administrative tools"
+        - "Student self-service"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: detailed_requirements
+    attributes:
+      label: "Detailed Requirements"
+      description: "List specific requirements for how this feature should work"
+      placeholder: |
+        - Feature should automatically send email when student registers
+        - Email should include student name, activity name, and teacher contact
+        - Teachers should be able to enable/disable notifications per activity
+        - Email template should be customizable
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_workflow
+    attributes:
+      label: "User Workflow"
+      description: "Describe step-by-step how users would interact with this feature"
+      placeholder: |
+        1. Teacher logs into the system
+        2. Teacher goes to activity settings
+        3. Teacher enables email notifications
+        4. When student registers, system automatically sends email
+        5. Teacher receives email with student details
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "Success Criteria"
+      description: "How will we know this feature is working correctly?"
+      placeholder: "e.g., Teachers receive emails within 5 minutes of student registration, Export includes all participant data in Excel format, Calendar shows all activities without conflicts"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority_level
+    attributes:
+      label: "How important is this feature?"
+      description: "This helps prioritize development work"
+      options:
+        - "Critical - Needed immediately for school operations"
+        - "High - Would significantly improve daily operations"
+        - "Medium - Nice to have for future improvement"
+        - "Low - Convenience feature for later"
+    validations:
+      required: true
+
+  - type: textarea
+    id: integration_requirements
+    attributes:
+      label: "Integration Requirements"
+      description: "Does this feature need to work with other systems? (email server, external calendar, student information system, etc.)"
+      placeholder: "e.g., Needs to integrate with school's Gmail system, Should export to Excel format, Must work with existing student email addresses"
+
+  - type: textarea
+    id: technical_constraints
+    attributes:
+      label: "Known Constraints or Limitations"
+      description: "Any technical limitations or requirements we should know about?"
+      placeholder: "e.g., Must work on mobile devices, Should not require additional software installation, Must be simple for non-technical teachers"
+
+  - type: textarea
+    id: examples_or_references
+    attributes:
+      label: "Examples or References"
+      description: "Any examples of similar features in other systems, or specific formats/layouts you want?"
+      placeholder: "e.g., Similar to how Google Classroom sends notifications, Export format like our current grade books"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## For the Coding Agent
+        
+        **Implementation Approach:**
+        - [ ] Analyze the feature requirements and determine implementation scope
+        - [ ] Identify which files need to be modified (backend API, frontend UI, database schema)
+        - [ ] Plan the technical architecture for the new feature
+        - [ ] Implement backend changes first (if needed) in appropriate router files
+        - [ ] Add any required database modifications in `src/backend/database.py`
+        - [ ] Implement frontend changes in HTML/CSS/JavaScript files
+        - [ ] Test the feature thoroughly with realistic use cases
+        - [ ] Ensure the feature integrates smoothly with existing functionality
+        
+        **Key Considerations:**
+        - Keep the implementation simple and maintainable
+        - Follow existing code patterns and architecture
+        - Ensure mobile compatibility if UI changes are involved
+        - Consider performance impact of new features
+        - Maintain data consistency and security
+        - Provide appropriate error handling and user feedback
+        
+        **Files to Consider:**
+        - **Backend**: `src/backend/routers/` for new API endpoints
+        - **Database**: `src/backend/database.py` for data structure changes
+        - **Frontend**: `src/static/` files for user interface changes
+        - **Dependencies**: `src/requirements.txt` if new libraries are needed

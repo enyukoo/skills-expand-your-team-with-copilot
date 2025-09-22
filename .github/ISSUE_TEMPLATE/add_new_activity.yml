@@ -1,0 +1,123 @@
+name: "Add New Activity"
+description: "Request to add a new extracurricular activity to the system"
+title: "[NEW ACTIVITY] Add "
+labels: ["enhancement", "new-activity"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Add New Activity Request
+        
+        Use this template to request adding a new extracurricular activity to the Mergington High School Activities system.
+        
+        **Please fill out all sections completely** so the coding agent can implement your request without needing additional information.
+
+  - type: input
+    id: activity_name
+    attributes:
+      label: "Activity Name"
+      description: "What is the name of the new activity?"
+      placeholder: "e.g., Science Club, Photography Club, Student Government"
+    validations:
+      required: true
+
+  - type: textarea
+    id: activity_description
+    attributes:
+      label: "Activity Description"
+      description: "Provide a detailed description of what this activity involves"
+      placeholder: "e.g., Explore scientific concepts through hands-on experiments and research projects"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: schedule_days
+    attributes:
+      label: "Meeting Days"
+      description: "Which days of the week will this activity meet?"
+      options:
+        - label: "Monday"
+        - label: "Tuesday"
+        - label: "Wednesday"
+        - label: "Thursday"
+        - label: "Friday"
+        - label: "Saturday"
+        - label: "Sunday"
+
+  - type: input
+    id: start_time
+    attributes:
+      label: "Start Time"
+      description: "What time does the activity start?"
+      placeholder: "e.g., 3:15 PM, 7:00 AM"
+    validations:
+      required: true
+
+  - type: input
+    id: end_time
+    attributes:
+      label: "End Time"
+      description: "What time does the activity end?"
+      placeholder: "e.g., 4:45 PM, 8:00 AM"
+    validations:
+      required: true
+
+  - type: input
+    id: max_participants
+    attributes:
+      label: "Maximum Participants"
+      description: "What is the maximum number of students that can participate?"
+      placeholder: "e.g., 15, 20, 25"
+    validations:
+      required: true
+
+  - type: textarea
+    id: initial_participants
+    attributes:
+      label: "Initial Participants (Optional)"
+      description: "List any students already signed up (one email per line)"
+      placeholder: |
+        student1@mergington.edu
+        student2@mergington.edu
+
+  - type: dropdown
+    id: time_category
+    attributes:
+      label: "Time Category"
+      description: "Which time category does this activity fit into?"
+      options:
+        - "Before School (morning)"
+        - "After School (afternoon)"
+        - "Weekend"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_requirements
+    attributes:
+      label: "Additional Requirements or Notes"
+      description: "Any special requirements, equipment needs, or other important information"
+      placeholder: "e.g., Requires computer lab access, Need art supplies, Outdoor activity"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## For the Coding Agent
+        
+        **Acceptance Criteria:**
+        - [ ] Add the new activity to the `initial_activities` dictionary in `src/backend/database.py`
+        - [ ] Include all required fields: description, schedule, schedule_details (days, start_time, end_time), max_participants, participants list
+        - [ ] Format times in 24-hour format for schedule_details (e.g., "15:15" for 3:15 PM)
+        - [ ] Use proper day names in schedule_details array (e.g., ["Monday", "Wednesday"])
+        - [ ] Create human-readable schedule string (e.g., "Mondays and Wednesdays, 3:15 PM - 4:45 PM")
+        - [ ] Set appropriate max_participants number
+        - [ ] Initialize with empty participants array or provided initial participants
+        - [ ] Verify the activity appears in the web interface after database reinitialization
+        
+        **Implementation Notes:**
+        - Activity data is stored in MongoDB via the `database.py` file
+        - The web interface automatically displays new activities without frontend changes
+        - Follow the existing data structure pattern used by other activities
+        - Test by clearing the database and restarting the application

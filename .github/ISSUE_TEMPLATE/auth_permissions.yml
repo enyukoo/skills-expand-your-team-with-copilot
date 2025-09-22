@@ -1,0 +1,164 @@
+name: "Authentication & Permissions"
+description: "Request changes to user login, access, or permission systems"
+title: "[AUTH] Update "
+labels: ["enhancement", "authentication", "security"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Authentication & Permissions Request
+        
+        Use this template to request changes to how users log in or what they can access in the system.
+        
+        **Security is important** - please provide detailed information so changes can be implemented safely.
+
+  - type: dropdown
+    id: auth_change_type
+    attributes:
+      label: "What type of authentication change is needed?"
+      description: "Select the primary type of change"
+      options:
+        - "Add new teacher account"
+        - "Remove/disable teacher account"
+        - "Change teacher password"
+        - "Change teacher permissions/role"
+        - "Add new user role type"
+        - "Change login process"
+        - "Add student login capability"
+        - "Improve password security"
+        - "Other authentication change"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_situation
+    attributes:
+      label: "Current Situation"
+      description: "Describe how authentication/permissions currently work and what's problematic"
+      placeholder: "e.g., New teacher Ms. Johnson needs access but doesn't have an account, Mr. Smith left the school but can still log in"
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired_change
+    attributes:
+      label: "What change is needed?"
+      description: "Describe exactly what should change"
+      placeholder: "e.g., Create account for Ms. Johnson with teacher permissions, Remove Mr. Smith's access completely"
+    validations:
+      required: true
+
+  - type: textarea
+    id: new_account_details
+    attributes:
+      label: "New Account Details (if adding accounts)"
+      description: "Provide account information for new users"
+      placeholder: |
+        Username: mjohnson
+        Display Name: Ms. Johnson
+        Role: teacher
+        Temporary Password: (will be provided separately)
+
+  - type: textarea
+    id: account_changes
+    attributes:
+      label: "Account Changes (if modifying existing accounts)"
+      description: "Specify what should change for existing accounts"
+      placeholder: |
+        Username: msmith
+        Action: Remove/disable access
+        Reason: No longer employed
+
+  - type: checkboxes
+    id: permission_levels
+    attributes:
+      label: "What permissions should users have?"
+      description: "Select appropriate permissions (for new accounts or role changes)"
+      options:
+        - label: "View all activities"
+        - label: "Register students for activities"
+        - label: "Unregister students from activities"
+        - label: "Modify activity details"
+        - label: "Add new activities"
+        - label: "Remove activities"
+        - label: "View student contact information"
+        - label: "Administrative functions"
+
+  - type: dropdown
+    id: urgency_level
+    attributes:
+      label: "How urgent is this change?"
+      description: "This affects implementation priority"
+      options:
+        - "Critical - Security issue or immediate access needed"
+        - "High - New staff member needs access soon"
+        - "Medium - Should be done within a week"
+        - "Low - Can be done when convenient"
+    validations:
+      required: true
+
+  - type: textarea
+    id: security_requirements
+    attributes:
+      label: "Security Requirements"
+      description: "Any specific security requirements or concerns?"
+      placeholder: "e.g., Password must be changed on first login, Account should expire after 90 days, Need two-factor authentication"
+
+  - type: input
+    id: temporary_access
+    attributes:
+      label: "Temporary Access Period (if applicable)"
+      description: "Should this access be temporary? If so, when should it expire?"
+      placeholder: "e.g., Until end of school year, 30 days only, Permanent access"
+
+  - type: textarea
+    id: verification_requirements
+    attributes:
+      label: "How should this be verified?"
+      description: "How will we confirm the authentication change worked correctly?"
+      placeholder: "e.g., Ms. Johnson should be able to log in and register students, Mr. Smith should get 'invalid credentials' error"
+    validations:
+      required: true
+
+  - type: textarea
+    id: rollback_plan
+    attributes:
+      label: "Rollback Plan"
+      description: "If something goes wrong, how should this change be reversed?"
+      placeholder: "e.g., Remove the new account from database, Restore the old password hash"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## For the Coding Agent
+        
+        **Security Checklist:**
+        - [ ] Verify the requested change is appropriate and safe
+        - [ ] Use secure password hashing (Argon2) for any new passwords
+        - [ ] Update the `initial_teachers` array in `src/backend/database.py` for account changes
+        - [ ] Test authentication by attempting to log in with the modified credentials
+        - [ ] Verify that permissions work correctly after changes
+        - [ ] Ensure removed accounts cannot access the system
+        - [ ] Document the change for future reference
+        
+        **Implementation Areas:**
+        - **Account Management**: `src/backend/database.py` - `initial_teachers` array
+        - **Authentication Logic**: `src/backend/routers/auth.py` - login endpoint
+        - **Password Hashing**: `src/backend/database.py` - `hash_password` function
+        - **Permission Checks**: Throughout backend routers for role-based access
+        
+        **Testing Procedure:**
+        1. Make the requested changes to the teacher database
+        2. Clear the database and restart the application to reload teacher data
+        3. Test login with new/modified credentials
+        4. Verify appropriate permissions are granted
+        5. Test that removed accounts are rejected
+        6. Confirm existing accounts still work normally
+        
+        **Security Notes:**
+        - Never store passwords in plain text
+        - Use the existing `hash_password` function for password security
+        - Verify role-based permissions are working correctly
+        - Test both positive and negative cases (valid and invalid logins)

@@ -1,0 +1,153 @@
+name: "Modify Existing Activity"
+description: "Request to modify an existing extracurricular activity"
+title: "[MODIFY ACTIVITY] Update "
+labels: ["enhancement", "modify-activity"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Modify Existing Activity Request
+        
+        Use this template to request changes to an existing extracurricular activity in the system.
+        
+        **Please fill out all sections completely** so the coding agent can implement your request without needing additional information.
+
+  - type: dropdown
+    id: activity_name
+    attributes:
+      label: "Activity to Modify"
+      description: "Which activity needs to be modified?"
+      options:
+        - "Chess Club"
+        - "Programming Class"
+        - "Art Club"
+        - "Drama Club"
+        - "Math Club"
+        - "Debate Team"
+        - "Weekend Robotics Workshop"
+        - "Manga Maniacs"
+        - "Other (specify in description)"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: changes_needed
+    attributes:
+      label: "What needs to be changed?"
+      description: "Select all that apply"
+      options:
+        - label: "Activity name"
+        - label: "Description"
+        - label: "Meeting days"
+        - label: "Start time"
+        - label: "End time"
+        - label: "Maximum participants"
+        - label: "Current participants list"
+
+  - type: input
+    id: new_activity_name
+    attributes:
+      label: "New Activity Name (if changing name)"
+      description: "What should the new name be?"
+      placeholder: "e.g., Advanced Chess Club"
+
+  - type: textarea
+    id: new_description
+    attributes:
+      label: "New Description (if changing description)"
+      description: "What should the new description be?"
+      placeholder: "e.g., Advanced chess strategies and tournament preparation"
+
+  - type: checkboxes
+    id: new_schedule_days
+    attributes:
+      label: "New Meeting Days (if changing schedule)"
+      description: "Which days should the activity meet?"
+      options:
+        - label: "Monday"
+        - label: "Tuesday"
+        - label: "Wednesday"
+        - label: "Thursday"
+        - label: "Friday"
+        - label: "Saturday"
+        - label: "Sunday"
+
+  - type: input
+    id: new_start_time
+    attributes:
+      label: "New Start Time (if changing time)"
+      description: "What should the new start time be?"
+      placeholder: "e.g., 3:30 PM, 7:30 AM"
+
+  - type: input
+    id: new_end_time
+    attributes:
+      label: "New End Time (if changing time)"
+      description: "What should the new end time be?"
+      placeholder: "e.g., 5:00 PM, 8:30 AM"
+
+  - type: input
+    id: new_max_participants
+    attributes:
+      label: "New Maximum Participants (if changing capacity)"
+      description: "What should the new maximum number be?"
+      placeholder: "e.g., 18, 25, 30"
+
+  - type: dropdown
+    id: new_time_category
+    attributes:
+      label: "New Time Category (if changing schedule)"
+      description: "Which time category should this activity fit into?"
+      options:
+        - "Before School (morning)"
+        - "After School (afternoon)"
+        - "Weekend"
+
+  - type: textarea
+    id: participant_changes
+    attributes:
+      label: "Participant List Changes (if needed)"
+      description: "Specify any changes to the current participants. Use format: ADD: email@domain.edu or REMOVE: email@domain.edu"
+      placeholder: |
+        ADD: newstudent@mergington.edu
+        REMOVE: oldstudent@mergington.edu
+
+  - type: textarea
+    id: change_reason
+    attributes:
+      label: "Reason for Changes"
+      description: "Why are these changes needed?"
+      placeholder: "e.g., Room availability changed, More students interested, Teacher schedule conflict"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: "Additional Notes"
+      description: "Any other important information about these changes"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## For the Coding Agent
+        
+        **Acceptance Criteria:**
+        - [ ] Locate the specified activity in `src/backend/database.py` within the `initial_activities` dictionary
+        - [ ] Update only the specified fields that were marked for change
+        - [ ] Maintain the existing data structure and format
+        - [ ] For schedule changes: update both the human-readable schedule string and schedule_details object
+        - [ ] For time changes: convert to 24-hour format in schedule_details (e.g., "15:30" for 3:30 PM)
+        - [ ] For day changes: use proper day names in schedule_details array
+        - [ ] For participant changes: add/remove emails from the participants array as specified
+        - [ ] Verify changes appear correctly in the web interface
+        - [ ] Ensure existing participants are preserved unless specifically requested to remove
+        
+        **Implementation Notes:**
+        - Changes are made to the `initial_activities` dictionary in `database.py`
+        - The database will reinitialize with new values when the application restarts
+        - Preserve the exact key name in the dictionary unless the activity name is being changed
+        - If changing activity name, update the dictionary key and ensure referential integrity
+        - Test changes by clearing database and restarting the application

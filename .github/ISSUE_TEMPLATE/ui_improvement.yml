@@ -1,0 +1,128 @@
+name: "UI/UX Improvement"
+description: "Request improvements to the website's appearance or user experience"
+title: "[UI/UX] Improve "
+labels: ["enhancement", "ui-ux"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## UI/UX Improvement Request
+        
+        Use this template to request improvements to how the website looks or works for students and teachers.
+        
+        **Please be as specific as possible** so the coding agent can implement your request without needing additional information.
+
+  - type: dropdown
+    id: improvement_area
+    attributes:
+      label: "What area needs improvement?"
+      description: "Which part of the website should be improved?"
+      options:
+        - "Overall page layout and design"
+        - "Activity cards display"
+        - "Filter and search functionality"
+        - "Student registration process"
+        - "Teacher login system"
+        - "Mobile/tablet responsiveness"
+        - "Color scheme and visual design"
+        - "Navigation and user flow"
+        - "Error messages and feedback"
+        - "Other (specify in description)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_problem
+    attributes:
+      label: "What is the current problem?"
+      description: "Describe what's not working well or what looks poor currently"
+      placeholder: "e.g., The activity cards are too small and hard to read, The login button is hard to find, Students can't easily see which activities are full"
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired_improvement
+    attributes:
+      label: "What improvement do you want?"
+      description: "Describe exactly how you want it to look or work instead"
+      placeholder: "e.g., Make activity cards larger with bigger text, Add a prominent login button in the header, Show 'FULL' badge on activities that can't accept more students"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority_level
+    attributes:
+      label: "How important is this improvement?"
+      description: "This helps prioritize the work"
+      options:
+        - "Critical - Makes the site very hard to use"
+        - "High - Would significantly improve the experience"
+        - "Medium - Nice to have improvement"
+        - "Low - Minor cosmetic change"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: affected_users
+    attributes:
+      label: "Who is most affected by this issue?"
+      description: "Select all that apply"
+      options:
+        - label: "Students viewing activities"
+        - label: "Teachers logging in"
+        - label: "Teachers registering students"
+        - label: "Mobile device users"
+        - label: "All users"
+
+  - type: textarea
+    id: specific_examples
+    attributes:
+      label: "Specific Examples or Screenshots"
+      description: "If you have specific pages, activities, or situations where this is a problem, describe them here"
+      placeholder: "e.g., When viewing Chess Club activity on phone, the description text is too small to read comfortably"
+
+  - type: dropdown
+    id: device_context
+    attributes:
+      label: "On what devices is this most problematic?"
+      description: "This helps understand the scope of the issue"
+      options:
+        - "Desktop computers only"
+        - "Mobile phones only"
+        - "Tablets only"
+        - "All devices"
+        - "Not device-specific"
+
+  - type: textarea
+    id: success_criteria
+    attributes:
+      label: "How will we know this is fixed?"
+      description: "Describe what success looks like after the improvement is made"
+      placeholder: "e.g., Students can easily read all activity information on their phones, Teachers can log in without confusion, Activity cards clearly show when they're full"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## For the Coding Agent
+        
+        **Acceptance Criteria:**
+        - [ ] Analyze the current UI/UX issue described in the frontend files
+        - [ ] Implement the requested improvement primarily in HTML (`src/static/index.html`), CSS (`src/static/styles.css`), and/or JavaScript (`src/static/app.js`)
+        - [ ] Ensure changes work on both desktop and mobile devices
+        - [ ] Test the improvement by starting the application and verifying the change works as expected
+        - [ ] Maintain existing functionality while implementing the improvement
+        - [ ] Follow the existing design patterns and color scheme unless specifically requested to change them
+        - [ ] Ensure accessibility is maintained or improved
+        
+        **Implementation Guidelines:**
+        - HTML structure changes go in `src/static/index.html`
+        - Visual styling changes go in `src/static/styles.css`
+        - Interactive behavior changes go in `src/static/app.js`
+        - Test changes by running the application and viewing in a browser
+        - Verify mobile responsiveness if applicable
+        - Ensure the improvement doesn't break existing features
+        - Use existing CSS variables and classes when possible for consistency
