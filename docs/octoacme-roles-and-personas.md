@@ -2,7 +2,7 @@
 
 This document defines the key roles and personas involved in managing the Mergington High School Activities project. Understanding these roles helps ensure clear accountability, effective collaboration, and smooth onboarding of new team members.
 
-> **Related Issue:** This document addresses gaps in role clarity and accountability identified in [Issue #15](https://github.com/enyukoo/skills-scale-institutional-knowledge-using-copilot-spaces/issues/15)
+> **Related Issue:** This document addresses gaps in role clarity and accountability identified in [Issue #15](https://github.com/enyukoo/skills-expand-your-team-with-copilot/issues/15)
 
 ## Table of Contents
 
